@@ -1,57 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Todo List 2023 with LocalStorage</title>
-	<link rel="stylesheet" href="main.css" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-</head>
-<body>
-	<main class="app">
-		<section class="greeting">
-			<h2 class="title">
-				What's up, <input type="text" id="name" placeholder="Name here" />
-			</h2>
-		</section>
-		
-		<section class="create-todo">
-			<h3>CREATE A TODO</h3>
-			<form id="new-todo-form">
-				<h4>What's on your todo?</h4>
-				<input 
-					type="text" 
-					placeholder="e.g. Get some milk"
-					name="content"
-					id="content" />
-				
-				<h4>Pick a category</h4>
-				<div class="options">
-					<label>
-						<input type="radio" name="category" id="category1" value="business" /> 
-						<span class="bubble business"></span>
-						<div>Business</div>
-					</label>
-					<label>
-						<input type="radio" name="category" id="category2" value="personal" />
-						<span class="bubble personal"></span>
-						<div>Personal</div>
-					</label>
-				</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  
+  <body class="d-flex flex-column min-vh-100">
+    <header class="header">
+      <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">To-Do List App</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="index.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="app.html">The App</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="code.html">The code</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Git Repo</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="https://parvizkportfolio.netlify.app/" target="_blank">About</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+    </header>
 
-				<input type="submit" value="Add todo" />
-			</form>
-		</section>
-
-		<section class="todo-list">
-			<h3>TODO LIST</h3>
-			<div class="list" id="todo-list"></div>
-		</section>
-	</main>
-
-	<script src="main.js"></script>
-</body>
-</html>
+    <main class="home-main">
+        <section class="left-content">
+          <h1 id="heading1">Welcome to the smart To-Do List Appication!</h1>
+          <p>Boost your productivity with our Smart To-Do List! Whether you're managing your work tasks, personal errands, or planning your day, our To-Do List is tailored to streamline your productivity.</p>
+          <p>With a sleek and intuitive interface, our To-Do List ensures effortless organization of your tasks. Add, edit, and prioritize tasks with ease, keeping you on top of your responsibilities. Set due dates and reminders to stay on track and never miss a deadline again.</p>
+          <p>Stay focused and efficient – simplify your task management with the Smart To-Do List. Try it now and conquer your to-do's with ease!</p>
+          <a href="app.html" class="pushable btn btn-primary">
+            <span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front">Explore Now</span>
+          </a>  
+          <div class="logos-home">
+            <img class="logo-icons" src="./html.png" alt="App Icons">
+            <img class="logo-icons" src="./css.png" alt="App Icons">
+            <img class="logo-icons" src="./javascript.png" alt="App Icons">
+          </div>
+        </section>
+       
+          <div class="todo-home">
+            <img class="todo-icon" src="./todo-pic.jpeg" alt="todoapp">
+          </div>
+      </main>
+      
+      <footer>
+        <div class="footer-content">
+          <h3>Parviz Khairullaev</h3>
+        </div>
+        <div class="footer-icons">
+          <a href="https://www.linkedin.com/in/parviz-khairullaev-413b42216/" target="_blank">
+            <img src="./linkedin.png" alt="linkedinicon" class="icon" />
+          </a>
+          <a href="https://github.com/Parviz-khrl" target="_blank">
+            <img src="./github.png" alt="githubicon" class="icon" />
+          </a>
+        </div>
+      </footer>
+      
+      <script src="./script.js" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List App</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <header class="header">
+      <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">To-Do List App</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="index.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="app.html">The App</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="code.html">The code</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="https://github.com/Parviz-khrl/todoapp" target="_blank">Git Repo</a>
+                      </li>
+                      <li class="nav-item">
+                         <a class="nav-link" href="https://parvizkportfolio.netlify.app/" target="_blank">About</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+    </header>
+
+    <main class="main-code">
+        <div class="code-header">The Code for To-Do List App</div>
+        <div class="code-container1">
+            <div class="code-container">
+                <div class="line-numbers" id="line-numbers-container">
+                </div>
+                <div class="code-editor">
+<pre id="code-content"><span id="comments">// Add event listener when the window loads to initialize the To-Do List application</span>
+    window.<span id="comment-yellow">addEventListener</span>('load', () => {
+        <span id="comments">// Retrieve or initialize the todos array from local storage</span>
+        todos = JSON.parse(localStorage.<span id="comment-yellow">getItem</span>('todos')) || [];
+        <span id="comments">// Get the input field for the username and the new todo form</span>
+        <span id="comment-blue">const</span> nameInput = document.<span id="comment-yellow">querySelector</span>('#name');
+        <span id="comment-blue">const</span> newTodoForm = document.<span id="comment-yellow">querySelector</span>('#new-todo-form');
+    
+        <span id="comments">// Retrieve the username from local storage or initialize it as an empty string</span>
+        <span id="comment-blue">const</span> username = localStorage.getItem('username') || '';
+    
+        <span id="comments">// Set the value of the name input field to the username</span>
+        nameInput.<span id="comment-yellow">value</span> = username;
+    
+        <span id="comments">// Add event listener to the name input field to update the username in local storage</span>
+        nameInput.<span id="comment-yellow">addEventListener</span>('change', (e) => {
+            localStorage.<span id="comment-yellow">setItem</span>('username', e.target.value);
+        })
+    
+        <span id="comments">// Add event listener to the new todo form to handle todo creation</span>
+        newTodoForm.<span id="comment-yellow">addEventListener</span>('submit', e => {
+            e.preventDefault();
+    
+            <span id="comments">// Create a new todo object with content, category, done status, and creation time</span>
+            <span id="comment-blue">const</span> todo = {
+                content: e.target.elements.content.value,
+                category: e.target.elements.category.value,
+                done: false,
+                createdAt: new Date().getTime()
+            }
+    
+            <span id="comments">// Add the new todo to the todos array</span>
+            todos.push(todo);
+    
+            <span id="comments">// Update the todos array in local storage</span>
+            localStorage.<span id="comment-yellow">setItem</span>('todos', JSON.stringify(todos));
+    
+            <span id="comments">// Reset the new todo form</span>
+            e.<span id="comment-yellow">target</span>.reset();
+    
+            <span id="comments">// Display the updated list of todos</span>
+            DisplayTodos()
+        })
+    
+        <span id="comments">// Display the initial list of todos when the window loads</span>
+        DisplayTodos()
+    })
+    
+    <span id="comments">// Function to display the list of todos</span>
+    <span id="comment-blue">function</span> DisplayTodos () {
+        <span id="comments">// Get the todo list container element</span>
+        <span id="comment-blue">const</span> todoList = document.querySelector('#todo-list');
+        <span id="comments">// Clear the todo list container</span>
+        todoList.innerHTML = "";
+    
+        <span id="comments">// Iterate through each todo in the todos array</span>
+        todos.<span id="comment-yellow">forEach</span>(todo => {
+            <span id="comments">// Create HTML elements to represent each todo item</span>
+            <span id="comment-blue">const</span> todoItem = document.createElement('div');
+            todoItem.<span id="comment-yellow">classList.add</span>('todo-item');
+    
+            <span id="comment-blue">const</span> label = document.createElement('label');
+            <span id="comment-blue">const</span> input = document.createElement('input');
+            <span id="comment-blue">const</span> span = document.createElement('span');
+            <span id="comment-blue">const</span> content = document.createElement('div');
+            <span id="comment-blue">const</span> actions = document.createElement('div');
+            <span id="comment-blue">const</span> edit = document.createElement('button');
+            <span id="comment-blue">const</span> deleteButton = document.createElement('button');
+    
+            <span id="comments">// Set attributes and classes for the HTML elements</span>
+            input.<span id="comment-yellow">type</span> = 'checkbox';
+            input.<span id="comment-yellow">checked</span> = todo.done;
+            span.<span id="comment-yellow">classList</span>.add('bubble');
+            <span id="comment-blue">if</span> (todo.category == 'personal') {
+                span.<span id="comment-yellow">classList</span>.add('personal');
+            } <span id="comment-blue">else</span> {
+                span.<span id="comment-yellow">classList.add</span>('business');
+            }
+            content.<span id="comment-yellow">classList.add</span>('todo-content');
+            actions.<span id="comment-yellow">classList.add</span>('actions');
+            edit.<span id="comment-yellow">classList.add</span>('edit');
+            deleteButton.<span id="comment-yellow">classList.add</span>('delete');
+    
+            <span id="comments">// Set content for the HTML elements</span>
+            content.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
+            edit.innerHTML = 'Edit';
+            deleteButton.innerHTML = 'Delete';
+    
+            <span id="comments">// Append HTML elements to create the todo item</span>
+            label.<span id="comment-yellow">appendChild</span>(input);
+            label.<span id="comment-yellow">appendChild</span>(span);
+            actions.<span id="comment-yellow">appendChild</span>(edit);
+            actions.<span id="comment-yellow">appendChild</span>(deleteButton);
+            todoItem.<span id="comment-yellow">appendChild</span>(label);
+            todoItem.<span id="comment-yellow">appendChild</span>(content);
+            todoItem.<span id="comment-yellow">appendChild</span>(actions);
+    
+            <span id="comments">// Append the todo item to the todo list container</span>
+            todoList.<span id="comment-yellow">appendChild</span>(todoItem);
+    
+            <span id="comments">// Add class to todo item if it is marked as done</span>
+            <span id="comment-blue">if</span> (todo.done) {
+                todoItem.<span id="comment-yellow">classList</span>.add('done');
+            }
+            
+            <span id="comments">// Add event listener to the checkbox to toggle the done status of the todo</span>
+            input.<span id="comment-yellow">addEventListener</span>('change', (e) => {
+                todo.done = e.target.checked;
+                localStorage.setItem('todos', JSON.stringify(todos));
+    
+                <span id="comments">// Update the UI to reflect the changes</span>
+                <span id="comment-blue">if</span> (todo.done) {
+                    todoItem.<span id="comment-yellow">classList</span>.add('done');
+                } <span id="comment-blue">else</span> {
+                    todoItem.<span id="comment-yellow">classList</span>.remove('done');
+                }
+    
+                <span id="comments">// Redisplay the todos</span>
+                DisplayTodos()
+            })
+    
+            <span id="comments">// Add event listener to the edit button to allow editing of todo content</span>
+            edit.<span id="comment-yellow">addEventListener</span>('click', (e) => {
+                <span id="comment-blue">const</span> input = content.<span id="comment-yellow">querySelector</span>('input');
+                input.<span id="comment-yellow">removeAttribute</span>('readonly');
+                input.focus();
+                input.<span id="comment-yellow">addEventListener</span>('blur', (e) => {
+                    input.<span id="comment-yellow">setAttribute</span>('readonly', true);
+                    todo.content = e.target.value;
+                    localStorage.<span id="comment-yellow">setItem</span>('todos', JSON.stringify(todos));
+                    <span id="comments">// Redisplay the todos</span>
+                    DisplayTodos()
+                })
+            })
+    
+            <span id="comments">// Add event listener to the delete button to delete the todo</span>
+            deleteButton.<span id="comment-yellow">addEventListener</span>('click', (e) => {
+                todos = todos.filter(t => t != todo);
+                localStorage.<span id="comment-yellow">setItem</span>('todos', JSON.stringify(todos));
+                <span id="comments">// Redisplay the todos</span>
+                DisplayTodos()
+            })
+    
+        })
+    }
+    
+    <span id="comments">// Event listener for when the document content has loaded</span>
+    document.addEventListener("DOMContentLoaded", <span id="comment-blue">function</span>() {
+        <span id="comments">// Get the container for line numbers and the code content</span>
+        <span id="comment-blue">const</span> lineNumbersContainer = document.<span id="comment-yellow">getElementById</span>("line-numbers-container");
+        <span id="comment-blue">const</span> codeContent = document.<span id="comment-yellow">getElementById</span>("code-content");
+        <span id="comments">// Split the code content into lines</span>
+        <span id="comment-blue">const</span> lines = codeContent.<span id="comment-yellow">innerText</span>.split("\n");
+        <span id="comments">// Create line number elements and append them to the container</span>
+        <span id="comment-blue">for</span> (<span id="comment-blue">let</span> i = 1; i <= lines.length; i++) {
+            <span id="comment-blue">const</span> lineNumberElement = document.<span id="comment-yellow">createElement</span>("pre");
+            lineNumberElement.<span id="comment-yellow">setAttribute</span>("data-line", i);
+            lineNumberElement.<span id="comment-yellow">textContent</span> = i;
+            lineNumbersContainer.<span id="comment-yellow">appendChild</span>(lineNumberElement);
+        }
+    });</p>     
+</pre>
+                </div>
+            </div>
+            <div class="description-cont">
+                <div>
+                    <ol>
+                        <li>loadEventListener()</li>
+                        <p>The loadEventListener function is a controller function that initializes the To-Do List application when the window loads. It retrieves any existing To-Do list data from local storage or initializes an empty array if there's no data. 
+                           It sets up event listeners for the username input field to store the username in local storage and for the new todo form to handle todo creation. Additionally, it calls the DisplayTodos function to render the existing todos on the page.</p>
+
+                        <li>DisplayTodos()</li>
+                        <p>DisplayTodos is a display function that iterates through each todo item in the todos array and dynamically generates HTML elements to represent each todo item on the page. 
+                           It sets up event listeners for the checkbox, edit, and delete buttons associated with each todo item. This function updates the UI to reflect changes made to the todos array, such as marking todos as done or deleting them.</p>
+
+                        <li>DOMContentLoadedEventListener()</li>
+                        <p>The DOMContentLoadedEventListener function initializes line numbers for code display when the document content has loaded. It extracts the content of the code container, splits it into lines, and dynamically creates line number elements based on the number of lines in the code. These line numbers are displayed alongside the code for better readability.</p>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+          <h3>Parviz Khairullaev</h3>
+        </div>
+        <div class="footer-icons">
+          <a href="https://www.linkedin.com/in/parviz-khairullaev-413b42216/" target="_blank">
+            <img src="./linkedin.png" alt="linkedinicon" class="icon" />
+          </a>
+          <a href="https://github.com/Parviz-khrl" target="_blank">
+            <img src="./github.png" alt="githubicon" class="icon" />
+          </a>
+        </div>
+      </footer>
+      
+    <script src="./main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
